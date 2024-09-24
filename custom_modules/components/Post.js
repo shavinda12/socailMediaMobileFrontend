@@ -1,19 +1,26 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 const Post = props => {
+  const navigation=useNavigation()
+
+  const navigateTitle=()=>{
+    navigation.navigate("Title",{title:props.title,comment:props.comment,description:props.description})
+  }
+  
   return (
-    <View style={postStyle.postContainer}>
-      <View style={postStyle.bodyContainer}>
-        <Text style={postStyle.titleStyle}>Title</Text>
-        <Text style={postStyle.descriptionStyle}>
-          no more discription         
-        </Text>
+    <TouchableOpacity onPress={navigateTitle}>
+      <View style={postStyle.postContainer}>
+        <View style={postStyle.bodyContainer}>
+          <Text style={postStyle.titleStyle}>{props.title}</Text>
+          <Text style={postStyle.descriptionStyle}>{props.description}</Text>
+        </View>
+        <View style={postStyle.commentContainer}>
+          <Text>{props.comment} comments</Text>
+        </View>
       </View>
-      <View style={postStyle.commentContainer}>
-        <Text>05 comments</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -29,18 +36,18 @@ const postStyle = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 1,
     borderColor: 'black',
-    borderRadius:4
+    borderRadius: 4,
   },
   titleStyle: {
     fontSize: 25,
     fontWeight: '500',
     color: 'black',
   },
-  bodyContainer:{
+  bodyContainer: {
     borderWidth: 1,
     borderColor: 'black',
-    padding:8,
-    borderRadius:4
+    padding: 8,
+    borderRadius: 4,
   },
   descriptionStyle: {
     fontSize: 15,
@@ -52,6 +59,6 @@ const postStyle = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    alignItems:'center'
+    alignItems: 'center',
   },
 });
